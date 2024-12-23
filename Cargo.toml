@@ -1,0 +1,25 @@
+[package]
+name = "simple-kv"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.95"
+bytes = "1.9.0"
+dashmap = "6.1.0"
+futures = "0.3.31"
+prost = "0.13.4"
+prost-types = "0.13.4"
+thiserror = "2.0.9"
+tokio = { version = "1.42.0", features = ["rt", "rt-multi-thread", "macros", "io-util", "net"] }
+tokio-stream = "0.1.17"
+tokio-util = { version = "0.7.13", features = ["codec"] }
+
+[build-dependencies]
+anyhow = "1.0.95"
+prost-build = "0.13.4"
+
+
+[[bin]]
+name="client"
+path="src/client/main.rs"

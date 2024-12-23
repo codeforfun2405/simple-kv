@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package kv;
+
+message KeyVal {
+    string key = 1;
+    bytes value  =2;
+}
+
+message CmdGet {
+    string key  =1;
+}
+
+message CmdSet {
+    KeyVal key_val = 1;
+}
+
+message CmdDel {
+    string key = 1;
+}
+
+message CmdGetResp {
+    string status = 1;
+    KeyVal key_val = 2;
+}
+
+message CmdSetResp {
+    string status = 1;
+    KeyVal key_val = 2;
+}
+
+message CmdDelResp {
+    string status = 1;
+}
+
+message KvCommand {
+    oneof Command {
+        CmdGet get = 1;
+        CmdSet set = 2;
+        CmdDel del = 3;
+    }
+}
+
+message KvCommandResp {
+    oneof CommandResp {
+        CmdGetResp get_resp = 1;
+        CmdSetResp set_resp = 2;
+        CmdDelResp del_resp = 3;
+    }
+}
