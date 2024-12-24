@@ -16,13 +16,16 @@ async fn main() -> anyhow::Result<()> {
         println!("client: {} connected", client_addr);
 
         let mut inner_store = store.clone();
-        match handler::stream_handle(stream, &mut inner_store).await {
-            Ok(_) => {
-                println!("client: {} disconnect", client_addr);
+
+        tokio::spawn(async move {
+            match handler::stream_handle(stream, &mut inner_store).await {
+                Ok(_) => {
+                    println!("client: {} disconnect", client_addr);
+                }
+                Err(e) => {
+                    println!("have error: {}", e);
+                }
             }
-            Err(e) => {
-                println!("have error: {}", e);
-            }
-        }
+        });
     }
 }
